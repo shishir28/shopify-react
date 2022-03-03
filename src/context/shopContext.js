@@ -53,10 +53,8 @@ class ShopProvider extends Component {
 
     fetchAllProducts = async () => {
         const products = await client.product.fetchAll();
-        this.setState({
-            products: products
-        });
-    }
+        this.setState({ products: products });
+    };
 
     fetchProductWithHandle = async (handle) => {
         const product = await client.product.fetchByHandle(handle);
@@ -76,10 +74,26 @@ class ShopProvider extends Component {
     closeMenu = () => {
     }
 
+    openMenu = () => {
+    }
+
+
     render() {
         console.log(this.state);
         return (
-            <ShopContext.Provider>
+            <ShopContext.Provider
+                value={{
+                    ...this.state,
+                    fetchAllProducts: this.fetchAllProducts,
+                    fetchProductWithHandle: this.fetchProductWithHandle,
+                    addItemToCheckout: this.addItemToCheckout,
+                    removeLineItem: this.removeLineItem,
+                    closeCart: this.closeCart,
+                    openCart: this.openCart,
+                    closeMenu: this.closeMenu,
+                    openMenu: this.openMenu
+
+                }}>
                 {this.props.children}
             </ShopContext.Provider>
         )
