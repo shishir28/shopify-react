@@ -7,7 +7,6 @@ const client = Client.buildClient({
     domain: process.env.REACT_APP_SHOPIFY_DOMAIN,
     storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN
 });
-console.log(client);
 
 class ShopProvider extends Component {
     state = {
@@ -44,11 +43,21 @@ class ShopProvider extends Component {
             .catch((error) => console.log(error));
     };
 
-    addItemToCheckout = async (item) => {
+    addItemToCheckout = async (variantId, quantity) => {
+        const lineItemsToAdd = [
+            {
+                variantId, quantity: parseInt(quantity, 10)
+            }];
 
+        const checkout = await client.checkout.addLineItems(this.state.checkout.id, lineItemsToAdd);
+        this.setState({ checkout });
+
+        this.openCart();
     }
 
     removeLineItem = async (lineItemIdsToRemove) => {
+        const checkout = await client.checkout.removeLineItems(this.state.checkout.id, lineItemIdsToRemove);
+        this.setState({ checkout });
     }
 
     fetchAllProducts = async () => {
@@ -64,39 +73,39 @@ class ShopProvider extends Component {
     }
 
     closeCart = () => {
-
-    }
+        this.setState({ isCartOpen: false });
+    };
 
     openCart = () => {
-
-    }
+        this.setState({ isCartOpen: true });
+    };
 
     closeMenu = () => {
+        this.setState({ isMenuOpen: false })
     }
 
     openMenu = () => {
+        this.setState({ isMenuOpen: true })
     }
 
-
     render() {
-        console.log(this.state);
         return (
             <ShopContext.Provider
                 value={{
                     ...this.state,
                     fetchAllProducts: this.fetchAllProducts,
                     fetchProductWithHandle: this.fetchProductWithHandle,
-                    addItemToCheckout: this.addItemToCheckout,
-                    removeLineItem: this.removeLineItem,
                     closeCart: this.closeCart,
                     openCart: this.openCart,
                     closeMenu: this.closeMenu,
-                    openMenu: this.openMenu
-
-                }}>
+                    openMenu: this.openMenu,
+                    addItemToCheckout: this.addItemToCheckout,
+                    removeLineItem: this.removeLineItem
+                }}
+            >
                 {this.props.children}
             </ShopContext.Provider>
-        )
+        );
     }
 }
 
