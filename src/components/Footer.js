@@ -1,14 +1,7 @@
-import React, { useContext } from 'react'
-import { ShopContext } from '../context/shopContext'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import {
     Image,
-    DrawerBody,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton,
     VStack,
     Text,
     Box,
