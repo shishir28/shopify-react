@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Grid, Text, Image, Button, Heading, Flex } from '@chakra-ui/react'
 import { ShopContext } from '../context/shopContext'
+import ImageWithText from '../components/ImageWithText';
+import RichText from '../components/RichText';
 
 const ProductPage = () => {
 
@@ -30,6 +32,20 @@ const ProductPage = () => {
                     <Button onClick={() => addItemToCheckout(product.variants[0].id, 1)} _hover={{ opacity: '70%' }} w="10rem" color="white" backgroundColor="#FF38BD">Add to Cart</Button>
                 </Flex>
             </Grid>
+
+            <RichText heading="The relaxation you’ve been waiting for." text="Our Bath bombs guarantee a fun, relaxing, and colorful night." />
+
+            <ImageWithText
+                button
+                image="https://cdn.shopify.com/s/files/1/0472/5705/9496/files/premium-bath-bombs.jpg?v=1610066758"
+                heading="Heading"
+                text="I'm baby kale chips twee skateboard tattooed, DIY iPhone ugh mixtape tumeric unicorn narwhal. Iceland shoreditch authentic, sartorial vegan twee flannel banh mi bushwick retro farm-to-table single-origin coffee. " />
+            <ImageWithText
+                reverse
+                button
+                image="https://cdn.shopify.com/s/files/1/0472/5705/9496/files/bath-bomb-and-candle.jpg?v=1610066758"
+                heading="Second Heading"
+                text="I'm baby kale chips twee skateboard tattooed, DIY iPhone ugh mixtape tumeric unicorn narwhal. Iceland shoreditch authentic, sartorial vegan twee flannel banh mi bushwick retro farm-to-table single-origin coffee. " />
         </Box >
     )
 }
