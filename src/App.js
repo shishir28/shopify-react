@@ -6,6 +6,7 @@ import Cart from './components/Cart';
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import NavMenu from './components/NavMenu';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/products/:handle" element={<ProductPage />} />
         <Route path="/" element={<Home />} />
       </Routes>
-      <p>Footer</p>
+      <Footer />
 
     </Router >
   );

@@ -33,7 +33,7 @@ function NavMenu() {
                             </VStack>
                         </DrawerBody>
                         <DrawerFooter textAlign="center">
-                            <Text w="100%">© Copyright www./shishirecommerce.myshopify.com</Text>
+                            <Text w="100%"> © Copyright www.shishirecommerce.myshopify.com</Text>
                         </DrawerFooter>
                     </DrawerContent>
                 </DrawerOverlay>

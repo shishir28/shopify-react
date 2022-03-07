@@ -23,13 +23,13 @@ const ProductPage = () => {
                 <Flex justifyContent="center" justifyItems="center">
                     <Image src={product.images[0].src} />
                 </Flex>
+                <Flex px="2rem" display="flex" flexDirection="column" alignItems="center" justifyContent="center" >
+                    <Heading pb="2rem" >{product.title}</Heading>
+                    <Text pb="2rem" fontWeight="bold" >{product.variants[0].price}</Text>
+                    <Text pb="2rem" color="gray.500">{product.description}</Text>
+                    <Button onClick={() => addItemToCheckout(product.variants[0].id, 1)} _hover={{ opacity: '70%' }} w="10rem" color="white" backgroundColor="#FF38BD">Add to Cart</Button>
+                </Flex>
             </Grid>
-            <Flex flexDirection="columns" alignItems="center" justifyContent="center" px="2rem">
-                <Heading pb="2rem" >{product.title}</Heading>
-                <Text pb="2rem" fontWeight="bold" >{product.variants[0].price}</Text>
-                <Text pb="2rem" color="gray.500">{product.description}</Text>
-                <Button onClick={() => addItemToCheckout(product.variants[0].id, 1)} _hover={{ opacity: '70%' }} w="10rem" color="white" backgroundColor="#FF38BD">Add to Cart</Button>
-            </Flex>
         </Box >
     )
 }
