@@ -16,7 +16,6 @@ const ProductPage = () => {
     if (!product.title) {
         return <div>Loading...</div>
     }
-    console.log(product);
 
     return (
         <Box>

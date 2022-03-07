@@ -11,7 +11,7 @@ import {
     DrawerCloseButton,
     Button,
     Grid,
-    Flex, Image, Text, Link
+    Flex, Image, Text, Link, Box
 } from '@chakra-ui/react'
 
 
@@ -21,13 +21,13 @@ import {
 
 function Cart() {
     const { isCartOpen, closeCart, checkout, removeLineItem } = useContext(ShopContext)
-    console.log(checkout);
     return (
         <>
             <Drawer
                 isOpen={isCartOpen}
                 placement='right'
                 onClose={closeCart}
+                size="sm"
             >
                 <DrawerOverlay />
                 <DrawerContent>
@@ -35,7 +35,7 @@ function Cart() {
                     <DrawerHeader>Your Shopping Cart</DrawerHeader>
 
                     <DrawerBody>
-                        {checkout.lineItems && checkout.lineItems.map(item => (
+                        {checkout.lineItems?.length ? checkout.lineItems.map(item => (
                             <Grid templateColumns="repeat(4, 1fr)" gap={1} key={item.id}>
                                 <Flex alignItems="center" justifyContent="center">
                                     <CloseIcon cursor="pointer" onClick={() => removeLineItem(item.id)} />
@@ -50,16 +50,18 @@ function Cart() {
                                     <Text>{item.variant.price}</Text>
                                 </Flex>
                             </Grid>
-                        ))}
+                        )) : <Box h="100%" w="100%"><Text h="100%" display="flex" flexDir="center" justifyContent="center" >Empty cart</Text></Box>
+                        }
                     </DrawerBody>
-                    <DrawerFooter>
-                        <Button w="100%">
-                            <Link href={checkout.webUrl} w="100%" >
-                                Checkout
-                            </Link>
-
-                        </Button>
-                    </DrawerFooter>
+                    {checkout.lineItems?.length ?
+                        <DrawerFooter>
+                            <Button w="100%">
+                                <Link href={checkout.webUrl} w="100%" >
+                                    Checkout
+                                </Link>
+                            </Button>
+                        </DrawerFooter> : null
+                    }
                 </DrawerContent>
             </Drawer>
         </>
