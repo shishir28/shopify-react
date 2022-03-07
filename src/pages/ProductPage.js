@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { Box, Grid, Text, Image, Button, Heading, Flex, Center } from '@chakra-ui/react'
+import { useParams } from 'react-router-dom'
+import { Box, Grid, Text, Image, Button, Heading, Flex } from '@chakra-ui/react'
 import { ShopContext } from '../context/shopContext'
 
 const ProductPage = () => {
@@ -18,17 +18,19 @@ const ProductPage = () => {
     }
 
     return (
-        <Box>
-            <Grid templateColumns="repeat(2,1fr)">
-                <Image src={product.images[0].src} />
+        <Box p="2rem">
+            <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} m="auto">
+                <Flex justifyContent="center" justifyItems="center">
+                    <Image src={product.images[0].src} />
+                </Flex>
             </Grid>
-            <Box>
-                <Heading>{product.title}</Heading>
-                <Text>{product.variants[0].price}</Text>
-                <Text>{product.description}</Text>
-                <Button onClick={() => addItemToCheckout(product.variants[0].id, 1)}>Add to Cart</Button>
-            </Box>
-        </Box>
+            <Flex flexDirection="columns" alignItems="center" justifyContent="center" px="2rem">
+                <Heading pb="2rem" >{product.title}</Heading>
+                <Text pb="2rem" fontWeight="bold" >{product.variants[0].price}</Text>
+                <Text pb="2rem" color="gray.500">{product.description}</Text>
+                <Button onClick={() => addItemToCheckout(product.variants[0].id, 1)} _hover={{ opacity: '70%' }} w="10rem" color="white" backgroundColor="#FF38BD">Add to Cart</Button>
+            </Flex>
+        </Box >
     )
 }
 
